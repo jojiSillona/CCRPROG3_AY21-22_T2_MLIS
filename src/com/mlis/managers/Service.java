@@ -249,7 +249,8 @@ public class Service {
                 //DELETE CASE
                 case '3' -> {
                     inputValid = true;
-                    deleteService();
+                    //deleteService();
+                    //where's deleteService()?
                 }
 
                 //SEARCH CASE
@@ -282,5 +283,27 @@ public class Service {
         } while(!inputValid);
     }
 
-    //TODO: Restore GETTERS AND SETTERS
+    public String getServiceCode() {
+        return serviceCode;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setServiceCode(String serviceCode) {
+        this.serviceCode = serviceCode;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 }
