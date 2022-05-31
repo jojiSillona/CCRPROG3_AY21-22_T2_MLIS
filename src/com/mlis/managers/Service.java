@@ -90,7 +90,7 @@ public class Service {
 
     public String searchService(){
 
-        System.out.print("Search for Services (You may use the Service Code or Keyword): ");
+        System.out.print("Search for Services.txt (You may use the Service Code or Keyword): ");
         String input = scanner.nextLine();
         ArrayList<String> multipleService = new ArrayList<>();
         String finalService = null;
@@ -98,7 +98,7 @@ public class Service {
         boolean serviceFound = false;
         try {
 
-            Scanner fileScanner = new Scanner(new File("Services.txt"));
+            Scanner fileScanner = new Scanner(new File("Services.txt.txt"));
             while(fileScanner.hasNext()){
 
                 String line = fileScanner.nextLine();
