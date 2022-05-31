@@ -45,7 +45,7 @@ public class Service {
                 if (input == 'Y') {
                     System.out.println("Saving.");
                     try {
-                        File serviceFile = new File("file services.txt");
+                        File serviceFile = new File("services.txt");
                         if (serviceFile.createNewFile()) {
                             System.out.println("File doesn't exist. Making file.");
                         } else {

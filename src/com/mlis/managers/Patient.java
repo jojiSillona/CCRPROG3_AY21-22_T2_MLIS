@@ -45,22 +45,22 @@ public class Patient {
 
                 case 1 -> {
 
-                    System.out.print("Please type the Patient.txt's UID: ");
+                    System.out.print("Please type the Patient's UID: ");
                     keyword[0] = scanner.nextLine();
                 }
                 case 2 -> {
 
-                    System.out.print("Please type the Patient.txt's last name: ");
+                    System.out.print("Please type the Patient's last name: ");
                     keyword[0] = scanner.nextLine();
-                    System.out.print("Please type the Patient.txt's first name: ");
+                    System.out.print("Please type the Patient's first name: ");
                     keyword[1] = scanner.nextLine();
-                    System.out.print("Please type the Patient.txt's birthday in format \"YYYYMMDD\": ");
+                    System.out.print("Please type the Patient's birthday in format \"YYYYMMDD\": ");
                     keyword[2] = Integer.toString(scanner.nextInt());
                     scanner.nextLine();
                 }
                 case 3 -> {
 
-                    System.out.print("Please type the Patient.txt's National ID: ");
+                    System.out.print("Please type the Patient's National ID: ");
                     keyword[0] = scanner.nextLine();
                 }
                 default -> System.out.print("You have inputted the wrong number! Please try again: ");
@@ -70,7 +70,7 @@ public class Patient {
         try {
 
             System.out.println("Searching for records");
-            Scanner fileScanner = new Scanner(new File("Patient.txt.txt"));
+            Scanner fileScanner = new Scanner(new File("Patient.txt"));
 
             while (fileScanner.hasNext()) {
 
@@ -101,14 +101,14 @@ public class Patient {
                 String[] patientDetails;
                 recordFound = false;
                 System.out.println("MULTIPLE RECORDS FOUND");
-                System.out.printf("%13s %12s %12s %12s %10s %7s %30s %13s %15s", "Patient.txt's UID", "Last Name", "First Name", "Middle Name", "Birthday", "Gender", "Address", "Phone Number", "National ID Number");
+                System.out.printf("%13s %12s %12s %12s %10s %7s %30s %13s %15s", "Patient's UID", "Last Name", "First Name", "Middle Name", "Birthday", "Gender", "Address", "Phone Number", "National ID Number");
                 System.out.println();
                 for (String entry : multipleEntries) {
                     patientDetails = entry.split(";");
                     System.out.printf("%13s %12s %12s %12s %10s %7s %30s %13s %15s", patientDetails[0], patientDetails[1], patientDetails[2], patientDetails[3], patientDetails[4], patientDetails[5], patientDetails[6], patientDetails[7], patientDetails[8]);
                     System.out.println();
                 }
-                System.out.print("Please type the Patient.txt's UID of your desired record: ");
+                System.out.print("Please type the Patient's UID of your desired record: ");
                 do {
                     String inputUID = scanner.nextLine();
                     for (String multipleEntry : multipleEntries) {
@@ -156,7 +156,7 @@ public class Patient {
             } else {
                 String[] patientDetails = finalRecord.split(";");
                 /* ARRAY GUIDELINES
-                0 - Patient.txt UID
+                0 - Patient UID
                 1 - Last Name
                 2 - First Name
                 3 - Middle Name
@@ -196,7 +196,7 @@ public class Patient {
 
         //INCREMENTING UID ELEMENTS
         try {
-            BufferedReader f = new BufferedReader(new FileReader("Patient.txt.txt"));
+            BufferedReader f = new BufferedReader(new FileReader("Patient.txt"));
             if (f.readLine() == null)
                 UID = "AAA00";
             else {
@@ -205,7 +205,7 @@ public class Patient {
                     String currentLine;
                     String lastLine = "";
 
-                    BufferedReader br = new BufferedReader(new FileReader("Patient.txt.txt"));
+                    BufferedReader br = new BufferedReader(new FileReader("Patient.txt"));
 
                     while ((currentLine = br.readLine()) != null)
                         lastLine = currentLine;
@@ -262,7 +262,7 @@ public class Patient {
     }
 
     /**
-     * A MAIN FUNCTION that adds patients to Patient.txt.txt
+     * A MAIN FUNCTION that adds patients to Patient.txt
      */
     public void addNewPatient() {
 
@@ -365,7 +365,7 @@ public class Patient {
             System.out.println("Saving.");
             try {
 
-                File patientFile = new File("Patient.txt.txt");
+                File patientFile = new File("Patient.txt");
                 if (patientFile.createNewFile())
                     System.out.println("File doesn't exist. Making file.");
                 else
@@ -396,7 +396,7 @@ public class Patient {
     }
 
     /**
-     * A MAIN FUNCTION that concatenates delete status to an existing line in Patient.txt.txt
+     * A MAIN FUNCTION that concatenates delete status to an existing line in Patient.txt
      */
     public void deletePatient() {
 
@@ -442,7 +442,7 @@ public class Patient {
         } while (!check);
 
         try {
-            Scanner fileScanner = new Scanner(new File("Patient.txt.txt"));
+            Scanner fileScanner = new Scanner(new File("Patient.txt"));
             while (fileScanner.hasNext()) {
 
                 temp = fileScanner.nextLine();
@@ -457,11 +457,11 @@ public class Patient {
             fileScanner.close();
 
             try {
-                FileWriter fileWriter = new FileWriter("Patient.txt.txt");
+                FileWriter fileWriter = new FileWriter("Patient.txt");
                 fileWriter.write(inputString);
                 fileWriter.close();
 
-                System.out.println("Data of Patient.txt " + targetPatient.substring(0, 12) + " has been deleted.");
+                System.out.println("Data of Patient " + targetPatient.substring(0, 12) + " has been deleted.");
                 noErrors = true;
 
             } catch (IOException e) {
@@ -501,7 +501,7 @@ public class Patient {
         int count = 1;
         String targetDisplay = searchPatient();
         String[] data = targetDisplay.split(";");
-        System.out.println("Patient.txt's UID:   " + data[0]);
+        System.out.println("Patient's UID:   " + data[0]);
         System.out.println("Name:            " + data[1] + "," + data[2] + " " + data[3]);
         System.out.println("Birthday:        " + data[4]);
         System.out.println("Address:         " + data[6]);
@@ -566,7 +566,7 @@ public class Patient {
                     String newAddress = scanner.nextLine();
 
                     try{
-                        reader = new BufferedReader(new FileReader("Patient.txt.txt"));
+                        reader = new BufferedReader(new FileReader("Patient.txt"));
                         String row = reader.readLine();
                         while (row != null)
                         {
@@ -579,7 +579,7 @@ public class Patient {
                                 ";", info[0] + ";" + info[1] + ";" + info[2] + ";" + info[3] + ";" + info[4] +
                                 ";" + info[5] + ";" + newAddress + ";" + info[7] + ";" + info[8] + ";");
 
-                        writer = new FileWriter("Patient.txt.txt");
+                        writer = new FileWriter("Patient.txt");
                         writer.write(newFile);
                         reader.close();
                         writer.close();
@@ -595,7 +595,7 @@ public class Patient {
                     String newNumber = scanner.nextLine();
 
                     try{
-                        reader = new BufferedReader(new FileReader("Patient.txt.txt"));
+                        reader = new BufferedReader(new FileReader("Patient.txt"));
                         String row = reader.readLine();
                         while (row != null)
                         {
@@ -608,7 +608,7 @@ public class Patient {
                                 ";", info[0] + ";" + info[1] + ";" + info[2] + ";" + info[3] + ";" + info[4] +
                                 ";" + info[5] + ";" + info[6] + ";" + newNumber + ";" + info[8] + ";");
 
-                        writer = new FileWriter("Patient.txt.txt");
+                        writer = new FileWriter("Patient.txt");
                         writer.write(newFile);
                         reader.close();
                         writer.close();
@@ -658,10 +658,10 @@ public class Patient {
 
         do{
             System.out.print("""
-                    [1] ADD NEW Patient.txt
-                    [2] EDIT Patient.txt  Record
-                    [3] DELETE Patient.txt Record
-                    [4] SEARCH Patient.txt Record
+                    [1] ADD NEW Patient
+                    [2] EDIT Patient  Record
+                    [3] DELETE Patient Record
+                    [4] SEARCH Patient Record
                     [X] RETURN TO MAIN MENU
                                         
                     Select a transaction:\040""");
