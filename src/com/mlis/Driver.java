@@ -2,6 +2,7 @@ package com.mlis;
 
 import com.mlis.managers.Patient;
 import com.mlis.managers.Service;
+import com.mlis.managers.SoftwareManager;
 
 import java.util.Scanner;
 
@@ -70,6 +71,8 @@ public class Driver {
     }
 
     public static void main(String[] args) {
+        SoftwareManager softwareManager = new SoftwareManager();
+        softwareManager.showScreen();
         Driver driver = new Driver();
         driver.mainProgram();
     }
