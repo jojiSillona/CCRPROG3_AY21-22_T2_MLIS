@@ -17,8 +17,8 @@ public class Frame extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    public void setScreen(JPanel panel){
-        if(this.screen != null)
+    public void setScreen(JPanel panel) {
+        if (this.screen != null)
             this.remove(this.screen);
 
         this.screen = panel;
