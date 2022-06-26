@@ -1,5 +1,3 @@
-package com.mlis.managers;
-
 import java.io.*;
 import java.util.*;
 
@@ -16,6 +14,7 @@ public class Patient {
     private String nationalIDNum;
 
     Scanner scanner = new Scanner(System.in);
+
     /**
      * A SUB-FUNCTION that returns a String containing all the information of target patient
      * @return String if the function finds the target patient successfully or null if unsuccessful or user quit
@@ -196,7 +195,7 @@ public class Patient {
 
         //INCREMENTING UID ELEMENTS
         try {
-            BufferedReader f = new BufferedReader(new FileReader("Patient.txt"));
+            BufferedReader f = new BufferedReader(new FileReader("/Patient.txt"));
             if (f.readLine() == null)
                 UID = "AAA00";
             else {
@@ -205,7 +204,7 @@ public class Patient {
                     String currentLine;
                     String lastLine = "";
 
-                    BufferedReader br = new BufferedReader(new FileReader("Patient.txt"));
+                    BufferedReader br = new BufferedReader(new FileReader("/Patient.txt"));
 
                     while ((currentLine = br.readLine()) != null)
                         lastLine = currentLine;
@@ -365,7 +364,7 @@ public class Patient {
             System.out.println("Saving.");
             try {
 
-                File patientFile = new File("Patient.txt");
+                File patientFile = new File("/Patient.txt");
                 if (patientFile.createNewFile())
                     System.out.println("File doesn't exist. Making file.");
                 else
@@ -442,7 +441,7 @@ public class Patient {
         } while (!check);
 
         try {
-            Scanner fileScanner = new Scanner(new File("Patient.txt"));
+            Scanner fileScanner = new Scanner(new File("/Patient.txt"));
             while (fileScanner.hasNext()) {
 
                 temp = fileScanner.nextLine();
@@ -457,7 +456,7 @@ public class Patient {
             fileScanner.close();
 
             try {
-                FileWriter fileWriter = new FileWriter("Patient.txt");
+                FileWriter fileWriter = new FileWriter("/Patient.txt");
                 fileWriter.write(inputString);
                 fileWriter.close();
 
@@ -566,7 +565,7 @@ public class Patient {
                     String newAddress = scanner.nextLine();
 
                     try{
-                        reader = new BufferedReader(new FileReader("Patient.txt"));
+                        reader = new BufferedReader(new FileReader("/Patient.txt"));
                         String row = reader.readLine();
                         while (row != null)
                         {
@@ -579,7 +578,7 @@ public class Patient {
                                 ";", info[0] + ";" + info[1] + ";" + info[2] + ";" + info[3] + ";" + info[4] +
                                 ";" + info[5] + ";" + newAddress + ";" + info[7] + ";" + info[8] + ";");
 
-                        writer = new FileWriter("Patient.txt");
+                        writer = new FileWriter("/Patient.txt");
                         writer.write(newFile);
                         reader.close();
                         writer.close();
@@ -595,7 +594,7 @@ public class Patient {
                     String newNumber = scanner.nextLine();
 
                     try{
-                        reader = new BufferedReader(new FileReader("Patient.txt"));
+                        reader = new BufferedReader(new FileReader("/Patient.txt"));
                         String row = reader.readLine();
                         while (row != null)
                         {
@@ -608,7 +607,7 @@ public class Patient {
                                 ";", info[0] + ";" + info[1] + ";" + info[2] + ";" + info[3] + ";" + info[4] +
                                 ";" + info[5] + ";" + info[6] + ";" + newNumber + ";" + info[8] + ";");
 
-                        writer = new FileWriter("Patient.txt");
+                        writer = new FileWriter("/Patient.txt");
                         writer.write(newFile);
                         reader.close();
                         writer.close();
