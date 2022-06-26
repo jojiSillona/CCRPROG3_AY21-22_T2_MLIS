@@ -1,5 +1,3 @@
-package com.mlis.managers;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

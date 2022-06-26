@@ -5,7 +5,7 @@ The Medical Laboratory Information System is a pseudo-database app that manages 
 ## Usage
 Download and unzip the compressed file. Then, open the folder as a project in any IDE. We recommend that you use IntelliJ. Then run Driver.java found here:
 
-```com.mlis.Driver.java```
+```Driver.java```
 
 ## Contributing
 This repository is not yet open to everyone.
