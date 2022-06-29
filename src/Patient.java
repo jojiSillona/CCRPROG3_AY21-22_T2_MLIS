@@ -192,24 +192,26 @@ public class Patient {
         int month = calendar.get(Calendar.MONTH) + 1;
         String monthString = String.format("%02d", month);
         String UID = "";
+        String lastLine = "";
 
         //INCREMENTING UID ELEMENTS
         try {
-            BufferedReader f = new BufferedReader(new FileReader("/Patient.txt"));
+            BufferedReader f = new BufferedReader(new FileReader("Patient.txt"));
             if (f.readLine() == null)
                 UID = "AAA00";
             else {
                 System.out.println("GENERATING NEW UID");
                 try {
                     String currentLine;
-                    String lastLine = "";
 
-                    BufferedReader br = new BufferedReader(new FileReader("/Patient.txt"));
+
+                    BufferedReader br = new BufferedReader(new FileReader("Patient.txt"));
 
                     while ((currentLine = br.readLine()) != null)
                         lastLine = currentLine;
 
                     UID = lastLine.substring(7, 12);
+
                     StringBuilder builder = new StringBuilder(UID);
                     int i = builder.length() - 1;
 
@@ -251,7 +253,7 @@ public class Patient {
             System.out.println("Program error. Aborting program.");
         }
 
-        if (calendar.get(Calendar.DAY_OF_MONTH) == 1) {
+        if (calendar.get(Calendar.MONTH) > Integer.parseInt(lastLine.substring(5, 7))) {
 
             System.out.println("Resetting incrementor");
             UID = "AAA00";
@@ -364,7 +366,7 @@ public class Patient {
             System.out.println("Saving.");
             try {
 
-                File patientFile = new File("/Patient.txt");
+                File patientFile = new File("Patient.txt");
                 if (patientFile.createNewFile())
                     System.out.println("File doesn't exist. Making file.");
                 else
@@ -397,6 +399,7 @@ public class Patient {
     /**
      * A MAIN FUNCTION that concatenates delete status to an existing line in Patient.txt
      */
+    //TODO: This shit doesn't work, pls fix.
     public void deletePatient() {
 
         char input;
@@ -441,7 +444,7 @@ public class Patient {
         } while (!check);
 
         try {
-            Scanner fileScanner = new Scanner(new File("/Patient.txt"));
+            Scanner fileScanner = new Scanner(new File("Patient.txt"));
             while (fileScanner.hasNext()) {
 
                 temp = fileScanner.nextLine();
@@ -456,7 +459,7 @@ public class Patient {
             fileScanner.close();
 
             try {
-                FileWriter fileWriter = new FileWriter("/Patient.txt");
+                FileWriter fileWriter = new FileWriter("Patient.txt");
                 fileWriter.write(inputString);
                 fileWriter.close();
 
@@ -511,6 +514,7 @@ public class Patient {
                 "Request's UID", "Lab Test Type", "Request Date", "Result");
         System.out.printf("%-20s %-20s %-20s %-20s %n",
                 "FUNCTION", "IS", "CURRENTLY", "UNAVAILABLE");
+        //TODO: FIX SEARCH AND DISPLAY
         do {
             if(count == 1) {
                 System.out.print("Do you want to print a laboratory test result? [Y/N]");
@@ -565,7 +569,7 @@ public class Patient {
                     String newAddress = scanner.nextLine();
 
                     try{
-                        reader = new BufferedReader(new FileReader("/Patient.txt"));
+                        reader = new BufferedReader(new FileReader("Patient.txt"));
                         String row = reader.readLine();
                         while (row != null)
                         {
@@ -578,7 +582,7 @@ public class Patient {
                                 ";", info[0] + ";" + info[1] + ";" + info[2] + ";" + info[3] + ";" + info[4] +
                                 ";" + info[5] + ";" + newAddress + ";" + info[7] + ";" + info[8] + ";");
 
-                        writer = new FileWriter("/Patient.txt");
+                        writer = new FileWriter("Patient.txt");
                         writer.write(newFile);
                         reader.close();
                         writer.close();
@@ -594,7 +598,7 @@ public class Patient {
                     String newNumber = scanner.nextLine();
 
                     try{
-                        reader = new BufferedReader(new FileReader("/Patient.txt"));
+                        reader = new BufferedReader(new FileReader("Patient.txt"));
                         String row = reader.readLine();
                         while (row != null)
                         {
@@ -607,7 +611,7 @@ public class Patient {
                                 ";", info[0] + ";" + info[1] + ";" + info[2] + ";" + info[3] + ";" + info[4] +
                                 ";" + info[5] + ";" + info[6] + ";" + newNumber + ";" + info[8] + ";");
 
-                        writer = new FileWriter("/Patient.txt");
+                        writer = new FileWriter("Patient.txt");
                         writer.write(newFile);
                         reader.close();
                         writer.close();

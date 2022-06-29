@@ -4,6 +4,10 @@ public class Driver {
     Patient patient = new Patient();
     Service service = new Service();
 
+    public void tests(){
+        patient.generateUID();
+    }
+
     public void mainProgram() {
         char input;
         boolean inputValid = false;
@@ -65,9 +69,8 @@ public class Driver {
     }
 
     public static void main(String[] args) {
-        SoftwareManager softwareManager = new SoftwareManager();
-        softwareManager.showScreen();
         Driver driver = new Driver();
         driver.mainProgram();
+        //driver.tests();
     }
 }
