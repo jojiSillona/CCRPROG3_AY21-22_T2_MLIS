@@ -1,3 +1,5 @@
 CAT;Covid-19 Antigen Test;1000;
 CBT;Covid-19 Antibody Test;500;
-CRP;Covid-19 RT-PCR;2000;
+CRP;Covid-19 RT-PCR;2000;D;Editing;
+SEX;Sex Services;10000;D;sex SEEEEXXX;
+CRP;Covid-19 RT-PCR;2500;

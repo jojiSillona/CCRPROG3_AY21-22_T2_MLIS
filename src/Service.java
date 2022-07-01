@@ -35,7 +35,7 @@ public class Service {
             System.out.println("Price: " + getPrice());
 
             do {
-                System.out.println("Would you like to save this service?");
+                System.out.print("Would you like to save this service? [Y/N]");
                 char input = scanner.next().charAt(0);
                 scanner.nextLine();
                 input = Character.toUpperCase(input);
@@ -43,7 +43,7 @@ public class Service {
                 if (input == 'Y') {
                     System.out.println("Saving.");
                     try {
-                        File serviceFile = new File("services.txt");
+                        File serviceFile = new File("Services.txt");
                         if (serviceFile.createNewFile()) {
                             System.out.println("File doesn't exist. Making file.");
                         } else {
@@ -54,7 +54,7 @@ public class Service {
                             PrintWriter pw = new PrintWriter(writer);
                             pw.println(serviceCode + ";" + description + ";" + price + ";");
                             writer.close();
-                            System.out.println(serviceCode + description + "has been added");
+                            System.out.println(serviceCode + " " + description + " has been added");
                         } catch (IOException e) {
                             System.out.println("An error occurred in saving");
                             e.printStackTrace();
@@ -88,7 +88,7 @@ public class Service {
 
     public String searchService(){
 
-        System.out.print("Search for Services.txt (You may use the Service Code or Keyword): ");
+        System.out.print("Search for Services (You may use the Service Code or Keyword): ");
         String input = scanner.nextLine();
         ArrayList<String> multipleService = new ArrayList<>();
         String finalService = null;
@@ -96,7 +96,7 @@ public class Service {
         boolean serviceFound = false;
         try {
 
-            Scanner fileScanner = new Scanner(new File("Services.txt.txt"));
+            Scanner fileScanner = new Scanner(new File("Services.txt"));
             while(fileScanner.hasNext()){
 
                 String line = fileScanner.nextLine();
@@ -167,6 +167,12 @@ public class Service {
                         exitLoop = false;
                     }
                 } while(!exitLoop);
+            } else{
+                String[] serviceDetails = finalService.split(";");
+                System.out.println("SERVICE FOUND!");
+                System.out.println("SERVICE UID: " + serviceDetails[0]);
+                System.out.println("DESCRIPTION: " + serviceDetails[1]);
+                System.out.println("PRICE: " + serviceDetails[2]);
             }
         } catch(IOException e) {
 
@@ -177,7 +183,83 @@ public class Service {
     }
 
     //DELETE SERVICE
-    //TODO: Restore DELETE SERVICES
+    public void deleteService(){
+
+        char input;
+
+        String deleteReason = null;
+        StringBuilder inputBuffer = new StringBuilder();
+        String temp;
+        boolean inputValid;
+        boolean noErrors;
+
+        System.out.println("===== DELETING PATIENT RECORD =====");
+        String targetService = searchService();
+        if(targetService == null)
+            return;
+
+        System.out.print("Do you want to delete the service? Y/N: ");
+
+        boolean check;
+        do {
+
+            check = false;
+
+            char deletePrompt = scanner.next().charAt(0);
+            scanner.nextLine();
+            deletePrompt = Character.toUpperCase(deletePrompt);
+
+            if (deletePrompt == 'Y') {
+
+                System.out.print("Please state the reason for deleting the service: ");
+                deleteReason = scanner.nextLine();
+                check = true;
+
+            } else if (deletePrompt == 'N') {
+
+                System.out.println("Returning to main menu.");
+                check = true;
+            } else {
+
+                System.out.print("Input unrecognizable, please try again: ");
+            }
+        } while (!check);
+
+        try{
+            Scanner fileScanner = new Scanner(new File("Services.txt"));
+            while (fileScanner.hasNext()) {
+
+                temp = fileScanner.nextLine();
+                if (temp.contains(targetService)) {
+                    temp = temp + "D;" + deleteReason + ";";
+                }
+                inputBuffer.append(temp);
+                inputBuffer.append('\n');
+            }
+            String inputString = inputBuffer.toString();
+
+            fileScanner.close();
+
+            try{
+                FileWriter fileWriter = new FileWriter("Services.txt");
+                fileWriter.write(inputString);
+                fileWriter.close();
+
+                System.out.println(targetService.substring(0, 3) + " has been deleted.");
+                return;
+                
+            } catch(IOException e){
+                System.out.println("UNEXPECTED ERROR. Returning to first step.");
+                e.printStackTrace();
+                
+            }
+        }catch(IOException e){
+            System.out.println("UNEXPECTED ERROR. Returning to first step.");
+            e.printStackTrace();
+
+        }
+        deleteService();
+    }
 
     public void editService(){
 
@@ -197,7 +279,8 @@ public class Service {
             scanner.nextLine();
             choice = Character.toUpperCase(choice);
             if(choice == 'Y'){
-                targetService = searchService();
+                deleteService();
+                addService();
                 scannerConfirm = true;
             } else if (choice == 'N'){
                 System.out.println("Returning to main menu.");
@@ -207,14 +290,12 @@ public class Service {
                 scannerConfirm = false;
             }
         } while(!scannerConfirm);
-
-
     }
 
     public void manageServiceRecords(){
 
         char input;
-        boolean inputValid;
+        boolean inputValid = false;
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("===== MANAGE SERVICES =====");
@@ -246,26 +327,31 @@ public class Service {
 
                 //DELETE CASE
                 case '3' -> {
-                    inputValid = true;
-                    //deleteService();
-                    //where's deleteService()?
+                    boolean repeatService = false;
+                    do {
+                        deleteService();
+                        System.out.print("Do you want to delete another service? Y/N: ");
+                        do {
+                            input = scanner.next().charAt(0);
+                            scanner.nextLine();
+                            input = Character.toUpperCase(input);
+                            if(input == 'Y') {
+                                repeatService = true;
+                                inputValid = true;
+                            }else if(input == 'N')
+                                repeatService = false;
+                            else{
+                                System.out.print("Input error, please try again: ");
+                                inputValid = false;
+                            }
+                        } while(inputValid);
+                    } while(repeatService);
                 }
 
                 //SEARCH CASE
                 case '4' -> {
                     inputValid = true;
-                    String outputService = searchService();
-                    if(outputService != null){
-                        String[] displayList = outputService.split(";");
-
-                        System.out.println("SERVICE FOUND!");
-
-                        for(String displayLine : displayList){
-                            System.out.println(displayLine);
-                        }
-
-                        System.out.println("Returning to main menu.");
-                    }
+                    searchService();
                 }
 
                 //EXIT CASE
