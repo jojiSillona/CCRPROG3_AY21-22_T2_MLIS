@@ -399,7 +399,7 @@ public class Patient {
     /**
      * A MAIN FUNCTION that concatenates delete status to an existing line in Patient.txt
      */
-    //TODO: This shit doesn't work, pls fix.
+
     public void deletePatient() {
 
         char input;
@@ -514,7 +514,7 @@ public class Patient {
                 "Request's UID", "Lab Test Type", "Request Date", "Result");
         System.out.printf("%-20s %-20s %-20s %-20s %n",
                 "FUNCTION", "IS", "CURRENTLY", "UNAVAILABLE");
-        //TODO: FIX SEARCH AND DISPLAY
+        //TODO: FIX SEARCH AND DISPLAY TO BE DONE BY RYAN
         do {
             if(count == 1) {
                 System.out.print("Do you want to print a laboratory test result? [Y/N]");
