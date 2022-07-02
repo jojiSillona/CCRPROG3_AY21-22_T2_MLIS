@@ -3,9 +3,11 @@ import java.util.Scanner;
 public class Driver {
     Patient patient = new Patient();
     Service service = new Service();
+    LabRequest labRequest = new LabRequest();
 
     public void tests(){
-        patient.generateUID();
+        //patient.generateUID();
+        labRequest.searchLabRequest();
     }
 
     public void mainProgram() {
@@ -20,7 +22,7 @@ public class Driver {
             System.out.print("""
           [1] Manage PATIENT RECORDS
           [2] Manage SERVICES
-          Laboratory Results Management is not available
+          [3] Manage LABORATORY RESULTS
           [X] Exit
 
           Select a transaction:\040""");
@@ -41,10 +43,9 @@ public class Driver {
                 }
 
                 // LAB RESULT CASE
-                // Cut off due to lack of time.
-                // case '3' -> {
-                // restartProgram = true;
-                // }
+                 case '3' -> {
+                     labRequest.manageLabRequests();
+                 }
 
                 case 'X' -> {
                     System.out.print("Are you sure that you want to exit? Y/N: ");

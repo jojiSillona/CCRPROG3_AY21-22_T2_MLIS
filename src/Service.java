@@ -111,7 +111,7 @@ public class Service {
 
             if(multipleCount > 1){
 
-                String[] serviceDetails = new String[0];
+                String[] serviceDetails;
                 serviceFound = false;
                 System.out.println("Multiple records found!");
                 System.out.printf("%10s %30s %10s", "Service Code", "Description", "Price");
