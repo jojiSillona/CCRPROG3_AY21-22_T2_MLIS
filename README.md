@@ -9,3 +9,4 @@ Download and unzip the compressed file. Then, open the folder as a project in an
 
 ## Contributing
 This repository is not yet open to everyone.
+(lol it is open)
